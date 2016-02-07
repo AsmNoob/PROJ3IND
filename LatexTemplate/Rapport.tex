@@ -1,13 +1,7 @@
 \documentclass[letterpaper]{article}
 \usepackage{natbib,alifexi}
 
-\title{A Mixed-Integer Programming Formulation Applied for Optimal Bids in an Electricity Spot Market\begin{figure}
-  \begin{center}
-    \includegraphics{}
-    \caption{}
-    \label{fig:}
-  \end{center}
-\end{figure}}
+\title{A Mixed-Integer Programming Formulation Applied for Optimal Bids in an Electricity Spot Market}
 \author{Gérard Tio Nogueras \\
 \mbox{}\\
 Université Libre de Bruxelles, Bruxelles, Belgique \\
@@ -20,12 +14,12 @@ gtionogu@ulb.ac.be}
 \end{abstract}
 
 \section{Introduction}
-\textit{General Explanation of the main problem and introduce the different approachs.
-Explaining the prinicipal mathematics used in the paper to introduce the following sections properly.
-Explaning the Generous and Stingy versions of the spot price.
+\textit{General Explanation of the main problem and introduce the different approaches.
+Explaining the principal mathematics used in the paper to introduce the following sections properly.
+Explaining the Generous and Stingy versions of the spot price.
 (Generous $->$ dispatched generators are paid the unit price of the most expensive loaded generator = spot price, Stingy $->$ each competitor receives as a unit price for his services the amount charged by himself ?)}
 
-In a wholesale electricity market ruled by a bidding mechanism where all generators want to maximize their profit but are supervised by a system operator that wants to minimize social expenses, strategies optimising a companie's profit are complicated problems.
+In a wholesale electricity market ruled by a bidding mechanism where all generators want to maximize their profit but are supervised by a system operator that wants to minimize social expenses, strategies optimising a companies' profit are complicated problems.
 In Fampa's paper, he presents two different approaches to the problem: The first is an heuristic technique considering a generous dispatching. The second is a MIP that he will use to find the optimal solution and validate the heuristic approach.
 In this paper we'll introduce a MIP variant which considers that a competitor can use his generators as a group instead of an instance and therefore translate the problem in a linear one.
 \textit{Maths}
