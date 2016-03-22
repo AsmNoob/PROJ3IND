@@ -1,0 +1,39 @@
+*****GROUP3IND*****
+****Plan de travail****
+- base de l'écrit :
+	- Intro:
+		*Présentation du probleme (Ingrédients du problème -> ALGO OP2RATIONNELLE)
+			- Alternatives (variables)
+			- Restrictions
+			- Fonction objectif à optimiser
+			- Solution 
+
+			-> 1/ Définition du probleme
+			-> 2/ Construction d'un modèle
+			-> 3/ Solution du modèle
+			-> 4/ Validation du modèle (remettre en question la validité du modèle)
+			-> 5/ Implémentation de la solution
+
+		* Différentes possibilités pour les solutions (Fampa)
+			- Méthodes proposées par Fampa
+				
+	- Nouvelle Formulation du problème
+		-> Programmation Lineaire (variables réelles et booléennes)
+					--> mixed-Integer Linear Programming: "http://nl.mathworks.com/help/optim/ug/mixed-integer-linear-programming-algorithms.html?s_tid=gen_loc_drop" (Def)
+		* Utilité de la nouvelle formulation:
+			-> Explication de l'idée derrière cette nouvelle formulation, et pourquoi c'est une relaxation du problème
+		* Présentation de la nouvelle formulation (Idem que pour Fampa --> Ingrédients du problème)
+			-> Propositions + Proof (x3)
+				--> Avec ces 3 propositions on montre que le problème peut maintenant être résolu avec une autre méthodologie
+		* Shortest Path Algorithm
+			-> Comment utiliser la formulation actuelle du probleme qui permet de rejoindre les tresholds optimaux via un algorithme "shortest path in graph"
+			-> Implémentation de l'algorithme 
+
+		* Algorithm Shortest path
+			Etapes de présentation d'un algorithme
+
+
+
+Remarques:
+- Phrases simples! Structure simple.
+

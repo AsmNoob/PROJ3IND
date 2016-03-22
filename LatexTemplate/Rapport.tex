@@ -4,31 +4,103 @@
 \title{A Mixed-Integer Programming Formulation Applied for Optimal Bids in an Electricity Spot Market}
 \author{Gérard Tio Nogueras \\
 \mbox{}\\
-Université Libre de Bruxelles, Bruxelles, Belgique \\
+Université Libre de Bruxelles, Bruxelles, Belgique\\
 gtionogu@ulb.ac.be}
 
 
 \begin{document}
+\maketitle
 
 \begin{abstract}
+%Remarque: Quand je parle du projet je ne sais pas si write 'we','they' ou juste parler de 'it'.
 \end{abstract}
 
+
+% entreprise belge qui calcule (Nside) le prix sur le marché européen. (pas splittable)
+
 \section{Introduction}
-\textit{General Explanation of the main problem and introduce the different approaches.
-Explaining the principal mathematics used in the paper to introduce the following sections properly.
-Explaining the Generous and Stingy versions of the spot price.
-(Generous $->$ dispatched generators are paid the unit price of the most expensive loaded generator = spot price, Stingy $->$ each competitor receives as a unit price for his services the amount charged by himself ?)}
+%Trouver une manière d'introduire l'introduction.
 
-In a wholesale electricity market ruled by a bidding mechanism where all generators want to maximize their profit but are supervised by a system operator that wants to minimize social expenses, strategies optimising a companies' profit are complicated problems.
-In Fampa's paper, he presents two different approaches to the problem: The first is an heuristic technique considering a generous dispatching. The second is a MIP that he will use to find the optimal solution and validate the heuristic approach.
-In this paper we'll introduce a MIP variant which considers that a competitor can use his generators as a group instead of an instance and therefore translate the problem in a linear one.
-\textit{Maths}
+A wholesale energy market is a market for electric power transactions. All producers bid energy units depending on their production capacity. Based on the bids made, a system operator distributes hour shifts to the chosen generators(energy producers) until the demand is met by increasing the price. The really important point is that all generators are paid the unit price of the most expensive loaded generator. We will call this price, the spot price. Therefore as long as you are cheaper or equal to the final spot price you will be chosen by the operator. Companies try to predict the spot price to sell a maximum quantity of energy at the highest price under the future spot price so they will be chosen over others.
+This is the result of the system generator that tries to minimise its expenses.\\
+%different solution approaches
+After introducing the problem and its formulation, Fampa etal[] 
+presents two different approaches to solve the problem: The first one is a heuristic technique considering a generous dispatching.
+%Peut-être définir ici "generous" ?
+The second one is a mixed integer reformulation of the problem used to find the optimal solution and allows the validation of the heuristic approach.\\
+%C'est ici qu'il me semble inaproprié d'écrire we (car je n'ai pas participé à la recherche)
+The goal of this report is to find faster ways to solve it. We realized that by simplifying some of the constraints and changing the dispatching resolution a little bit, we could reduce the problem to a shortest path problem and apply faster algorithms.
+\newpage
+\subsection{The problem of Fampa}
+% Je ne trouve pas de meilleur mot pour décrire l'étude sur laquelle on s'est basé.
+\subsubsection{Mathematical presentation of the problem}
+The variables used to model the problem are the following: \\ \\
+$d$ is the total load needed \\ 
+$\lambda_j$ price bid of a generator j \\ 
+$g_j$ energy production of generator j \\ 
+$\overline{g}_j$ generation capacity bid of generator j \\ 
+$\pi_d$ spot price \\ 
+$R_j$ profit of generator j \\ 
+$J$ group of all generators \\ 
+$c_j$ operating cost of generator j \\ 
+$R$ net profit of a company E, group of generators $j \in E$ \\ \\
+Companies related variables: \\ \\
+$\lambda_E$ set of price bids \\
+$\overline{g}_E$ quantity bids \\ \\
+We have a strategic problem to solve. Where two entities want to optimize their objective function(bilevel problem). The system operator minimizes his expenses for a given load of energy needed:\\ \\
+%demander comment écrire en dessous de min ou si possibilité d'avoir le latex d'Etienne pour mieux écrire les formules mathématiques.
+min$_{g_j} \sum_{j \in J} \lambda_j g_j$ \\ \\
+This function is subject to constraints:\\ \\
+$\sum_{j \in J} g_j = d, \pi_d$ \\
+$g_j \leq \overline{g}_j, \pi_{g_j}, j \in J$ \\
+$g_j \geq 0, j\in J$ \\ \\
+We can add another interesting value useful for future purposes, the profit:\\ \\
+$R_j = (\pi_d - c_j)g_j, j \in J$ \\ \\
+Then comes the objective function that we want to maximize. Here we wish to optimize the companies' profit. First we have to introduce more variables linked to this function. To model the simultaneous competition between the companies they decided to use a set of scenarios where competitors actions are represented:\\ \\
+$p_s$ probability of a scenario $s \in [1,...,S]$\\
+$S$ set of scenarios \\
+$ER(\lambda_E,\overline{g}_E)$ expected profit\\
+$g^*_j$ maximum capacity of production of generator j \\
+$\pi^s_d(\lambda_E,\overline{g}_E)$ \\ 
+$g^s_j(\lambda_E,\overline{g}_E)$ \\ \\
+This last two variables are respectively represent the spot price and energy production linked to a particular scenario $s$.\\
+With the new variables the function becomes:\\ \\
+max$_{\lambda_E , \overline{g}_E}$ $ER(\lambda_E,\overline{g}_E) = \sum_{s \in S} p_s R^s (\lambda_E , \overline{g}_E)$\\ \\
+under this constraint: \\ \\
+$\overline{g}_j \leq g^*_j, j \in E$ \\ \\
+With these models for the operator and the companies, we revisit the formulation of the bilevel optimization problem: \\ \\
+%hardcore formula%(4)
+%opti company (us)
+	% opti system operator\\
+They present another formulation of the problem based on Bertrand's and Cournot's models.
+The pure price models are the predefinition of price bids (usually zero) and optimization of quantity bids.(Bertrand) \\
+And the pure quantity bidding models are the predefinition of quantity bids, maximization of capacity and optimization of price bids.(Cournot)
+%demander l'utilité de ces modélisations et la nécéssité qu'elles apparaissent dans le rapport.
+% la raison de mon questionnement est que les deux cas semblent être des cas particuliers et qu'on devrait plutôt s'attaquer au problème général ?
+\\
+These approaches could be solved by applying bilinear programming algorithms but due to the size of these problems in real applications, this solution is not suitable anymore and this is the reason they focused on heuristic procedures.
+%page9, (7), penalize the non-linear complementary constraint of the problem resulted of the Bertrand's appoach ?? 
 
-\section{Presentation of the different approaches}
-\textit{Present Fampa's approaches using heuristics and MILP and trying to summarize Main paperwork.}
+\subsubsection{Heuristic solution}
+After laying the foundations of the problem, they proposed different paths to solve the problem. First of all for a Bertrand configuration they used the same heuristics used for taxation. The idea is to start with the best solution for the company problem("leader problem") and move from this position to acceptable conditions with the operator problem ("follower's problem"). Three different initial values are given, the first is the scenario where we generate the maximum power capacity for the company E, for the second we are trying to change completely the input to push the algorithm for different answers then the first input by deciding that no plant from the company are dispatched. And the third is a normal scenario, where a regular polynomial solver is used. This methods allows to find the best price for the given scenario by easily solving the dispatch after distributing each company's move. They optimized it by repeating randomly the same procedure with a different scenario.
 
-\section{New Formulation of the problem Fampa}
-\textit{Explain the main difference}
+%poser des questions sur 3.2 local search, à quoi ça correspond dans l'algorithm.
+
+\subsubsection{The mixed integer formulation}
+% Dans une grande partie du papier ils parlent uniquement de mixed integer et pour le pt 4 ils rajoutent linear, indispensable, sens différent ?
+The reason behind the use of this type of algorithms for our problem is to find the global optimal solution.\\ The problem is reformulated using a decomposition of the variables $\lambda_j$ into binary variables for the follower problem.This allows for really fast computation of the sub-problem. With the new decomposition: \\ \\
+
+% Huge reformulation
+
+\subsubsection{Presentation of our new formulation}
+
+After analysing the paper, M. Labb\'e team found a new approach for the problem. Instead of considering that the generators can only offer amounts in their capacity, now the companies can offer bids with the capacities of all their generators combined. This already allows for improvement since we avoid the waste of many generators but they add another feature which is the stingy dispatching.
+Generous dispatching used before meant that we would keep as spot price the first price that would surpass the load needed. Now with this stingy dispatching we stop at the first price reaching the load needed: 
+% insérer ici schéma explicatif.
+This might not seem like a drastic change but this allows us to completely rewrite the problem. The new idea is that we can rejoin M. Fampa's generous dispatching by reducing infinitesimally our quantity at spot price to reach a higher spot price: 
+% insérer schéma ici montrant cette réduction infinitésimale
+\section{New Formulation of the problem WEM/Fampa}
+\textit{New formulation, presented as we would do for algo3}
 \subsection{Proposition - optimal bid price}
 \textit{Short text introducing the proposition} 
 \subsection{Proof}

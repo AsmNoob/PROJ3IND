@@ -1,0 +1,317 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.2.8)  3 MAR 2016 00:18
+entering extended mode
+**./example.tex
+(example.tex
+LaTeX2e <2015/10/01> patch level 2
+Babel <3.9n> and hyphenation patterns for 69 languages loaded.
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\article.cl
+s"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\size10.clo
+"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\natbib\natbib.s
+ty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip43
+\bibsep=\skip44
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count87
+) (alifexi.sty
+Conference Style for ALIFE XI
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.st
+y"
+Package: times 2005/04/12 PSNFSS-v9.2a (SPQR) 
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
+cx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\keyval
+.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\graphi
+cs.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\graphics\trig.s
+ty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\00miktex\graphi
+cs.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdftex-def\pdft
+ex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\infw
+arerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\generic\oberdiek\ltxc
+mds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen103
+\Gin@req@width=\dimen104
+)
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 86.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/cmex/m/n on input line 86.
+\titlebox=\skip45
+) (example.aux)
+\openout1 = `example.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
+LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 12.
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1ptm.f
+d"
+File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
+)
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\context\base\supp-pdf
+.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count89
+\scratchdimen=\dimen105
+\scratchbox=\box26
+\nofMPsegments=\count90
+\nofMParguments=\count91
+\everyMPshowfont=\toks15
+\MPscratchCnt=\count92
+\MPscratchDim=\dimen106
+\MPnumerator=\count93
+\makeMPintoPDFobject=\count94
+\everyMPtoPDFconversion=\toks16
+)
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <14.4> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 13.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 13.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 15.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 30.
+
+
+Package natbib Warning: Citation `BTW87' on page 1 undefined on input line 35.
+
+
+Package natbib Warning: Citation `BTW88' on page 1 undefined on input line 35.
+
+
+Package natbib Warning: Citation `SJD' on page 1 undefined on input line 40.
+
+
+Package natbib Warning: Citation `GS' on page 1 undefined on input line 42.
+
+
+Package natbib Warning: Citation `CA2' on page 1 undefined on input line 45.
+
+
+Package natbib Warning: Citation `AB1' on page 1 undefined on input line 49.
+
+
+Package natbib Warning: Citation `OBA' on page 1 undefined on input line 49.
+
+
+Package natbib Warning: Citation `CA2' on page 1 undefined on input line 51.
+
+
+Package natbib Warning: Citation `BUR90' on page 1 undefined on input line 59.
+
+
+Package natbib Warning: Citation `BUR93' on page 1 undefined on input line 59.
+
+
+Package natbib Warning: Citation `WIL' on page 1 undefined on input line 67.
+
+
+Package natbib Warning: Citation `GE77' on page 1 undefined on input line 68.
+
+
+Package natbib Warning: Citation `GE93' on page 1 undefined on input line 68.
+
+
+Package natbib Warning: Citation `ECL96' on page 1 undefined on input line 75.
+
+
+Package natbib Warning: Citation `BS' on page 1 undefined on input line 81.
+
+
+Package natbib Warning: Citation `SB96' on page 1 undefined on input line 84.
+
+
+Package natbib Warning: Citation `BP96' on page 1 undefined on input line 84.
+
+
+Package natbib Warning: Citation `NFST' on page 1 undefined on input line 88.
+
+
+Package natbib Warning: Citation `IAL' on page 1 undefined on input line 95.
+
+[1{C:/Users/shargaas/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+
+
+
+]
+
+Package natbib Warning: Citation `CHU' on page 2 undefined on input line 184.
+
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 215.
+
+
+("C:\Users\shargaas\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ot1pcr.f
+d"
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+
+Package natbib Warning: Citation `OBA' on page 2 undefined on input line 218.
+
+[2]
+
+Package natbib Warning: Citation `CHU' on page 3 undefined on input line 257.
+
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.269 ...graphics[width=2.3in, angle=90]{fig2.eps}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 292.
+
+Package natbib Warning: Citation `LT94' on page 3 undefined on input line 296.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.344 ...raphics[width=2.25in, angle=90]{fig3.eps}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[3]
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.366 ...raphics[width=2.25in, angle=90]{fig4.eps}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Package natbib Warning: Citation `ABH' on page 4 undefined on input line 377.
+
+
+! LaTeX Error: Unknown graphics extension: .eps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.382 ...graphics[width=2.2in, angle=90]{fig5.eps}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+No file example.bbl.
+
+Package natbib Warning: There were undefined citations.
+
+[4] (example.aux) ) 
+Here is how much of TeX's memory you used:
+ 1614 strings out of 493634
+ 21094 string characters out of 3134016
+ 88796 words of memory out of 3000000
+ 5005 multiletter control sequences out of 15000+200000
+ 22797 words of font info for 47 fonts, out of 3000000 for 9000
+ 1026 hyphenation exceptions out of 8191
+ 34i,11n,21p,271b,257s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/e
+nc/dvips/fontname/8r.enc}<C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/shargaas/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/shargaas/App
+Data/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Use
+rs/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cm
+mi7.pfb><C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmmi8.pfb><C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Users/shargaas/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/shargaas/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Users/sh
+argaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pf
+b><C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfo
+nts/cm/cmr8.pfb><C:/Users/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type
+1/public/amsfonts/cm/cmsy10.pfb><C:/Users/shargaas/AppData/Local/Programs/MiKTe
+X 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Users/shargaas/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/urw/courier/ucrr8a.pfb><C:/Users/shargaas/AppD
+ata/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/sharga
+as/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb><C:/Users
+/shargaas/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
+Output written on example.pdf (4 pages, 184472 bytes).
+PDF statistics:
+ 80 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
