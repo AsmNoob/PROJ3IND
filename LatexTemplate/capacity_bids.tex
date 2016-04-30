@@ -1,0 +1,369 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+
+\begin{document}
+
+\section{Mixed-Integer Programming Formulation}
+
+Quick and dirty definitions of the variables and indices.
+
+\begin{tabular}{ll}
+$s \in S$ & the set of all scenarios, \\
+$j \in J$ & the set of all generators we control, \\
+$j \in J^c$ & the set of all generators of the competitors, \\
+$i \in I$ & the set of all possible bid prices.
+\end{tabular}
+
+The model parameters:
+
+\begin{tabular}{ll}
+$p_s$ & the probability that the scenario $s$ will be realised, \\
+$d_s$ & the total demand in the scenario $s$, \\
+$\lambda^c_{s,j}$ & the price bid by the competitors in the scenario $s$ for their generator $j$, \\
+$\bar{g}^c_{s,j}$ & the quantity bid by the competitors in the scenario $s$ for the generator $j$, \\
+$g^{c*}_j$ & the maximum quantity which can be produced by the competitors generator $j$, \\
+$g^*_j$ & the maximum quantity which can be produced by our generator $j$, \\
+$c_j$ & the operating cost to produce one unit of energy by our generator $j$.
+\end{tabular}
+
+The model variables:
+
+\begin{tabular}{ll}
+$R_s$ & our profit during scenario $s$, \\
+$R$ & our average profit for all scenarios, \\
+$\pi_s$ & the spot price during scenario $s$, \\
+$\lambda_{j}$ & the price bid by us for our generator $j$, \\
+$\bar{g}_{j}$ & the quantity bid by us for our generator $j$, \\
+$g^c_{s,j}$ & the actual quantity produced by the competitors generator $j$ during scenario $s$, \\
+$g_{s,j}$ & the actual quantity produced by our generator $j$ during scenario $s$.
+\end{tabular}
+
+The goal is to maximize profit, which can be modeled as such:
+\begin{equation}
+\max R, \\
+\end{equation}
+\begin{align}
+\mbox{s.t. } \qquad R &= \sum_{s \in S} p_s R_s, \\
+R_s &= \sum_{j \in J} \left(\pi_s - c_j\right) g_{s,j} & &\forall s \in S, \\
+\sum_{j \in J} g_{s,j} + \sum_{j \in J^C} g^c_{s,j} &= d_s & &\forall s \in S, \\
+g^c_{s,j} &\ge 0 & &\forall s \in S, j \in J^c, \\
+g^c_{s,j} &\le \bar{g}^{c}_j & &\forall s \in S, j \in J^c, \\
+\lambda^c_{s,j} < \pi_s &\rightarrow g^c_{s,j} = \bar{g}^{c}_j & &\forall s \in S, j \in J^c, \\
+\lambda^c_{s,j} > \pi_s &\rightarrow g^c_{s,j} = 0 & &\forall s \in S, j \in J^c, \\
+\bar{g}_{s,j} &\ge 0 & &\forall s \in S, j \in J, \\
+\bar{g}_{s,j} &\le g^*_j & &\forall s \in S, j \in J, \\
+g_{s,j} &\ge 0 & &\forall s \in S, j \in J, \\
+g_{s,j} &\le \bar{g}_j & &\forall s \in S, j \in J, \\
+\lambda_{j} < \pi_s &\rightarrow g_{s,j} = \bar{g}_j & &\forall s \in S, j \in J, \\
+\lambda_{j} > \pi_s &\rightarrow g_{s,j} = 0 & &\forall s \in S, j \in J, \\
+\pi_s &\in \left\{ \lambda^c_{s,j}, \forall j \in J^c \right\} \cup \left\{ \lambda_j, \forall j \in J \right\} & &\forall s \in S.
+\end{align}
+
+
+It should be noted that in this formulation, the spot price $\pi_s$ is not
+set to the lowest price for which all the bids of lower value satisfy the
+demand, but instead is set to the highest price for which all the bids of
+lower value does not surpass the demand. While this is different from the
+real definition of the spot price, we could reduce our own bid quantities
+by some infinitesimal amount and get the same effect, with only an
+infinitesimal reduction in profit.
+
+Since that formulation is highly inconvenient, we would like to switch to
+a linear or bilinear formulation. In order to do so, we need to simplify
+the constraints on the spot prices $\pi_s$. If the bid prices $\lambda_j$ were
+constrained to be from a finite subset of values, then $\pi_s$ could be
+easily defined using those same values.
+
+In this bidding problem, we can prove that the optimal value for each bid
+price $\lambda_j$ is always equal to one of the possible competitor bid
+prices $\lambda^c_{s,j}$, assuming that ties in prices are resolved in our
+advantage.
+
+\textbf{Proof:} Let assume that the one of our bids $\lambda_j$ is strictly
+between two other bids (either from ourself or from competitors)
+$\lambda^c_{s,j_1}$ and $\lambda^c_{s,j_2}$ (with no other bids in between):
+\begin{equation}
+\lambda^c_{s,j_1} < \lambda_j < \lambda^c_{s,j_2},
+\end{equation}
+then the expected profit $R$ would either increase or remain constant if
+$\lambda_j$ was to be increased to $\lambda^c_{s,j_2}$, for all possible
+scenarios. The possibilities are:
+\begin{itemize}
+\item $\lambda^c_{s,j_2} \le \pi_s$: The bid price is above $\lambda^c_{s,j_2}$,
+so any value of $\lambda_j$ lesser or equal than $\lambda^c_{s,j_2}$ would
+not change the
+bid price. And since it implies that $\lambda_j \le \pi_s$, then all of the
+production for generator $j$ will be sold, for any bid value.
+So $R_s$ would stay constant from this change in bid price.
+\item $\lambda^c_{s,j_1} \ge \pi_s$: The bid price is below $\lambda_j$, so
+none of the production from generator $j$ is sold. Increasing the bid price
+does not change that fact, so $R_s$ would remain constant from this change
+in bid price.
+\item $\lambda_j = \pi_s$: The bid price is equal to $\lambda_j$. This means
+that the production from generator $j$ is necessary to satisfy the scenario
+demand. Therefore, increasing the bid price will also increase the spot
+price by the same amount, as long as the bid price is not increased past
+another bid price ($\lambda^c_{s,j_2}$ in this case). So, increasing
+$\lambda_j$ up to $\lambda^c_{s,j_2}$ would increase $R_s$.
+\end{itemize}
+Since increasing $\lambda_j$ to the next higher bid $\lambda^c_{s,j_2}$
+always lead to an increasing or a constant $R_s$, the same can be said of
+the average profits $R$. It is thus always optimal to only select bid prices
+amongst the set of all possible competitors bid prices.
+
+We will denote using $\lambda^c_i$ a competitor bid price from any scenario,
+using the $i$ index instead of $s,j$. Those prices are assumed to be
+sorted in ascending order ($i' > i \rightarrow \lambda^c_{i'} \ge \lambda^c_i$).
+This adds extra variables to our model:
+
+\begin{tabular}{ll}
+$y_{s,i}$ & binary variable that indicates if the spot price in scenario $s$ is set to $\lambda^c_i$, \\
+$x_{ij}$ & binary variable that indicates if $\lambda_j$ is set to $\lambda^c_i$.
+\end{tabular}
+
+Rewriting our model, we now have:
+
+\begin{equation}
+\max R, \\
+\end{equation}
+\begin{align}
+\mbox{s.t. } \qquad R &= \sum_{s \in S} p_s R_s, \\
+R_s &= \sum_{j \in J} \left(\sum_{i \in I} y_{s,i} \lambda^c_i - c_j\right) g_{s,j} & &\forall s \in S, \label{eqn:Rs} \\
+\bar{g}_j &\ge 0 & &\forall s \in S, j \in J, \\
+\bar{g}_j &\le g^*_j & &\forall s \in S, j \in J, \\
+x_{ij} &\in \{0,1\} & &\forall i \in I, j \in J, \\
+\sum_{i \in I} x_{ij} &= 1 & &\forall j \in J, \\
+y_{s,i} &\in \{0,1\} & &\forall s \in S, i \in I, \\
+\sum_{i \in I} y_{s,i} &= 1 & &\forall s \in S, \\
+g_{s,j} &\ge 0 & &\forall s \in S, j \in J, \\
+g_{s,j} &\ge \bar{g}_j x_{ij} y_{s,i'} & &\forall s \in S, j \in J, i, i' \in I, i < i' \label{eqn:big_gsj_ge} \\
+g_{s,j} &\le \bar{g}_j & &\forall s \in S, j \in J, \\
+g_{s,j} &\le \bar{g}_j \left( 1 - x_{ij} y_{s,i'} \right) & &\forall s \in S, j \in J, i, i' \in I, i > i', \label{eqn:big_gsj_le} \\
+\sum_{j \in J} g_{s,j} + \sum_{\substack{j \in J^c \\ \lambda^c_{s,j} < \lambda_i}} \bar{g}^c_{s,j} &\le d^s y_{s,i} + \left(\max_{s' \in S} d^{s'} \right) (1 - y_{s,i}) & &\forall s \in S, i \in I, \\
+\sum_{j \in J} g_{s,j} + \sum_{\substack{j \in J^c \\ \lambda^c_{s,j} \le \lambda_i}} \bar{g}^c_{s,j} &\ge d^s y_{s,i} & &\forall s \in S, i \in I.
+\end{align}
+
+Since some of those constraints have non-linear terms, we need to linearize
+them. Constraint (\ref{eqn:big_gsj_ge}) can be replaced by:
+\begin{equation}
+g_{s,j} \ge \bar{g}_j - g^*_j (2 - x_{ij} - y_{s,i'}) \qquad \forall s \in S, j \in J, i, i' \in I, i < i',
+\end{equation}
+constraint (\ref{eqn:big_gsj_le}) can be replaced by:
+\begin{equation}
+g_{s,j} \le g^*_j (2 - x_{ij} - y_{s,i'}) \qquad \forall s \in S, j \in J, i, i' \in I, i > i',
+\end{equation}
+while each $y_{s,i} g_{s,j}$ term in equation (\ref{eqn:Rs})
+must be replaced by a new variable $yg_{s,ij}$ which follows the following
+constraints:
+\begin{align}
+yg_{s,ij} &\ge 0, \\
+yg_{s,ij} &\le g_{s,j}, \\
+yg_{s,ij} &\le g^*_j y_{s,i}, \\
+yg_{s,ij} &\ge g_{s,j} - g^*_j (1 - y_{s,i}).
+\end{align}
+
+With this formulation, we have a total of $O\left( |S| |J| |I| \right)$
+continuous variables, $O\left( (|S| + |J|) |I| \right)$ binary variables, and
+$O\left( |S| |J| |I|^2 \right)$ constraints.
+
+
+
+\section{Shortest-Path Algorithm}
+
+We now relax the strategic-pricing problem to allow us to split the capacity
+of each generator into an arbitrary number of unique bids. The generators
+that will be used to fulfill the bids will then simply be the $n$-cheapest
+generators, where $n$ is chosen such that their capacity is at least equal
+to the amount we end up having to produce. Accordingly, it is no longer
+useful to associate each bid to a specific generator. Instead, each bid
+will only be associated to a specific price $\lambda_i$. The quantity bid
+on price $\lambda_i$ will be denoted using $g_i$.
+
+Before introducing the shortest-path algorithm to solve the relaxed
+strategic-pricing problem, we have to prove a few properties.
+We define the cumulative bid quantities $G_i = \sum_{\substack{i' \in I\\i'
+\le i}} g_{i'}$, the residual demands $r_{s,i} = d_s - \sum_{\substack{j \in
+J^c\\ \lambda^c_{s,j} < \lambda_i}} \bar{g}^c_{s,j}$, and the effective capacities
+$c^e_i = \sum_{\substack{j \in J\\c_j < \lambda_i}} g^*_j$.
+We also note that we can alternatively define the bids using the
+cumulative bid quantities $G_i$ instead of the bid quantities $g_i$, with
+the restrictions that $G_{i'} \ge G_i$ if $i'>i$ (do not allow negative bid
+quantities) and $G_i \le c^e_i$ (do not offer production at a loss).
+
+The first property we need is that impact on profit of modifying a consecutive
+list of cumulative bid quantities $\left\{G_i, \ldots, G_{i'}\right\}$
+only depends on the modified quantities and their two neighbouring quantities
+$G_{i-1}$ and $G_{i'+1}$.
+
+\textbf{Proof:} Let consider a specific scenario $s$. When calculating the
+profits $R_s$, there are three possibilities:
+\begin{itemize}
+\item $G_{i-1} > r_{s,i}$: the bids at values lower than $\lambda_i$ are
+sufficient to satisfy the whole demand. Therefore, the spot price $\pi_s <
+\lambda_i$ and will not vary based on $\left\{G_i, \ldots, G_{i'}\right\}$.
+The production sold will also not be depending on the modified bids. Therefore,
+$R_s$ will be constant.
+\item $G_{i'+1} \le r_{s,i'+1}$: the bids at values lower than $\lambda_{i'+1}$
+are not sufficient to satisfy the whole demand. Therefore, the spot price
+$\pi_s \ge \lambda_{i'+1}$ and will not vary based on
+$\left\{G_i, \ldots, G_{i'}\right\}$. The production sold will also not be
+depending on the modified bids, since all bids up to $G_{i'+1}$ will be
+fully sold. Therefore, $R_s$ will be constant.
+\item $G_{i-1} \le r_{s,i} \wedge G_{i'+1} > r_{s,i'+1}$: the bids at lower
+values than $\lambda_i$ does not suffice to satisfy the whole demand, and
+the bids at lower values than $\lambda_{i'}$ will be enough. In this
+case, the precise values of the modified bid quantities
+$\left\{G_i, \ldots, G_{i'}\right\}$ will have an impact on the scenario
+profit. Because of the values of $G_{i-1}$ and $G_{i'+1}$, the spot price
+$\pi_s$ must be in $\left\{\lambda_{i}, \ldots, \lambda_{i'}\right\}$.
+Which one will be the spot price will depend on the precise values of the
+cumulative bid quantities. Since the profits for a single scenario
+only depend on the spot price and the cumulative bid quantity at that
+value, then they will only depend on $\left\{G_i, \ldots, G_{i'}\right\}$.
+\end{itemize}
+Since for each scenario the profit is only a function of the modified
+cumulative bid quantities or their two neighbouring quantities, the same
+will be true for the full profit function $R$, thus proving the property.
+
+A consequence of this property is that the profit function $R$ can be
+written as a sum of incremental profits for individual bids:
+\begin{equation}
+R\left( (\lambda_1, g_1), \ldots, (\lambda_n, g_n) \right) =
+R\left( (\lambda_1, g_1) \right) +
+\sum_{k=2}^n \left[ R\left( (\lambda_{k-1}, G_{k-1}), (\lambda_k, g_k) \right) -
+R\left( (\lambda_{k-1}, G_{k-1}) \right) \right].
+\end{equation}
+
+The second property is that at least one of the set of optimal bids has
+all of the cumulative bid quantities $G_i$ equal to one of the following
+thresholds:
+\begin{itemize}
+\item The effective capacity at that price, $c^e_i$.
+\item The residual demand for some scenario $s$ and for the next higher
+bid price $r_{s,i+1}$, if lower than the effective capacity.
+\item The bid quantity is equal to the following bid quantity $G_{i+1}$,
+which itself must be at a threshold. Recursively, we can find that these
+thresholds are all of the $r_{s,i'}$ for $i' > i+1$.
+\end{itemize}
+
+\textbf{Proof:} This property can be proven by showing that if we have
+a solution, then the solution can always be improved by moving one of
+the $G_i$, as long as all the $G_i$ are not at thresholds.
+There are two cases to consider: $G_i > c^e_i$ and $G_i < c^e_i$.
+
+In the case where $G_i > c^e_i$, then it means that we are offering to
+sell power at a value lower than our marginal cost. Therefore, it is
+trivial to see that reducing $G_i$ to $c^e_i$ will always increase
+our profit (if that power was to be sold at that value), or leave it
+unchanged (if the bid price happened to be different).
+
+So only the $G_i < c^e_i$ case remains.
+Let again consider a specific scenario $s$, and a set of
+bids such that for some $i$, $G_i$ is not at any of the preceding thresholds,
+and $G_i < G_{i+1}$. It will always be possible to find such a $i$ if at
+least single $G_{i'}$ is not at a threshold, since if $G_i$ is not at a
+threshold, then either $G_i < G_{i+1}$, or $G_{i+1}$ is also not at a
+threshold, since by construction of the thresholds. In that case, increasing
+$G_i$ to its next threshold value will depend on the value of the spot price
+$\pi_s$:
+\begin{itemize}
+\item $\pi_s < \lambda_i$: the demand is fully covered by previous bids, so
+how is bid at $\lambda_i$ does not matter. So increasing $G_i$ leaves
+$R_s$ unchanged.
+\item $\pi_s > \lambda_{i+1}$: the demand requires at least the bids up to
+values $\lambda_{i+2}$ to reach the demand. This indicates that bidding up
+to $G_{i+1}$ will not be sufficient to reach the demand. Since $G_i$ cannot
+be increased past $G_{i+1}$ and $G_{i+1}$ is not modified,
+then the spot price will also not be modified. So the $R_s$ will again remains
+unchanged.
+\item $\pi_s = \lambda_i$: the demand is only satisfied using the bids at
+value $\lambda_i$. If $G_i < r_{s,i}$, increasing $G_i$ increases how much
+power we sell at that bid price, therefore also increasing profit
+(since $\lambda_i$ is higher than the marginal production cost).
+If $G_i \ge r_{s,i}$, then we are already selling as much as the demand
+allows, and increasing $G_i$ does not change the amount of power sold, thus
+leaving $R_s$ unchanged. In both cases the spot price stays at $\lambda_i$.
+\item $\pi_s = \lambda_{i+1}$: This is the only situation where increasing
+the value of $G_i$ could lead to a decrease in the spot price value. For
+the spot price to decrease from $\pi_s = \lambda_{i+1}$ to
+$\pi_s = \lambda_i$, then the cumulative quantity bid by us at this price
+level must be higher than the residual demand at the next next level:
+$G_i > r_{s,i+1}$. But since $r_{s,i+1}$ is one of the thresholds, we are
+forbidden from increasing $G_i$ past its value, so the spot price will remain
+constant. Therefore, increasing $G_i$ will not have any impact on the profit,
+since the profit only depends on the quantity bid at the spot price level
+$G_{i+1}$, which is not modified here.
+\end{itemize}
+Since increasing a $G_i$ that is lower than $c^e_i$ and $G_{i+1}$ and not
+at any of its threshold values always either increases $R_s$ or leaves it
+constant, the same can be said for the full profit function $R$.
+
+This second property indicates that an optimal set of bids can always be
+found by only looking at bids where the $G_i$, and thus also the $g_i$,
+take specific values (the $c^e_i$ or $r_{s,i'}$ thresholds). Since there is
+only a finite number of those values, an algorithm that would checked
+all combinations would find the optimal solution in finite time. But such
+an algorithm would be very slow, taking a time exponential in the size
+of the problem to find the solution. This is where the first property can
+be used: since the profit function $R$ can be written as an incremental
+sum over individual bids, we can optimise each bids iteratively.
+Defining $R^{max}_i(G_i)$ as the maximum profit when bidding for a total
+quantity $G_i$ at price up to $\lambda_i$, we have:
+\begin{equation}
+R^{max}_i(G_i) = \max_{\substack{G_{i-1} \in \left\{ c^e_{i-1}, G_i \right\}
+\cup \left\{ r_{s,i} \forall s \in S \right\}
+\\ 0 \le G_{i-1} \le G_i}}
+R^{max}_{i-1}(G_{i-1}) +
+\left[  R\left( (\lambda_{i-1}, G_{i-1}), (\lambda_i, G_i - G_{i-1}) \right) -
+R\left( (\lambda_{i-1}, G_{i-1}) \right) \right].
+\end{equation}
+The optimal profit is then readily obtained by taking the value of
+$R^{max}_i(c^e_i)$ associated with the highest bid value $\lambda_i$ of
+the problem.
+
+Since there are $O(|S| |J^c|)$ (where $|J^c|$ is used as a shorthand for
+the average number of competitor bids per scenario) different bid prices,
+and also $O(|S| |J^c|)$ different values for the bid quantities $G_i$,
+this mean that finding the optimal set of bids requires the
+computation of $O(|S|^3 |J^c|^2)$ profit increments.
+
+The single-scenario single-bid profit function $R_s((\lambda_i, G_i))$
+has three regimes: none of the bid is sold, a partial amount of is sold
+at the value given, or all of it is sold at a potentially higher spot price.
+\begin{equation}
+R_s((\lambda_i, G_i)) = \left\{
+	\begin{array}{cl}
+	0 & \mbox{if } r_{s,i} < 0, \\
+	\lambda_i r_{s,i} - c(r_{s,i}) & \mbox{if } 0 \le r_{s,i} < G_i, \\
+	G_i \left( \min_{i' \ge i} \left\{ \lambda_{i'} : r_{s,i'+1} < G_i \right\} \right) - c(G_i) & \mbox{if } G_i \le r_{s,i}.
+	\end{array}
+\right.
+\end{equation}
+Where $c(G)$ is the total cost to produce $G$ units of energy with the
+cheapest available generator. This function can be pre-calculated for all
+possible thresholds in advance in $O(|S| |J^c| |J| + |J| \lg |J|)$ time.
+These profit functions can be pre-calculated in $O(|S|^2 |J^c|^2)$ time,
+and used to calculate the profit increments.
+\begin{equation}
+R_s\left( (\lambda_{i-1}, G_{i-1}), (\lambda_i, G_i - G_{i-1}) \right) -
+R_s((\lambda_i, G_i)) = \left\{
+	\begin{array}{cl}
+	0 & \mbox{if } r_{s,i} < G_{i-1}, \\
+	R_s((\lambda_i, G_i)) - R_s((\lambda_{i-1}, G_{i-1})) & \mbox{if } G_{i-1} \le r_{s,i}.
+	\end{array}
+\right.
+\end{equation}
+This last formulation has a simple interpretation: there are two possibilities
+when adding an additional bid to a previous bid. Either there is no left-over
+demand at the new bid price ($r_{s,i} < G_{i-1}$) and the system is unchanged
+by the additional bid; or there is some left-over demand at the new bid price
+($G_{i-1} \le r_{s,i}$), and then the spot price will at least be $\lambda_i$,
+and the profits will as if there was only a single bid at that value.
+Since the full profit function is the sum over all scenarios of the
+single-scenario profit functions, the time to compute a single profit
+increment is $O(|S|)$, which lead to a total running time of the algorithm
+of $O(|S|^4 |J^c|^2)$.
+
+\end{document}
+
